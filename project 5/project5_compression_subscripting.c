@@ -11,43 +11,41 @@ e.g. input: helllloo
 
 void compress(char *input, char *output)
 {
-  char *i = input, *o = output; // i and o represent the pointers pointing to the input and output arrays respectively
-
-  int count = 1; // counts the number of repeats
-
-  for (i = input; *i != '\0'; i++)
+  int count = 1, j = 0;
+  for (int i = 0; input[i] != '\0'; i++)
   {
-    if (*i == *(i + 1))
+    if (input[i] == input[i + 1])
     {
       count++;
       i++;
 
       // loop runs until all the repeating characters are counted
-      while (*i == *(i + 1))
+      while (input[i] == input[i + 1])
       {
-        count++;
         i++;
+        count++;
       }
+
       if (count > 2)
       {
-        *o++ = '0' + count; // converts integer count to char
-        *o++ = *i;          // adds the repeating char to the output string
+        output[j++] = '0' + count; // converting integer to char
+        output[j++] = input[i];
       }
       else
       {
-        *o++ = *i;
-        *o++ = *i; // no consecutive repeats
+        output[j++] = input[i];
+        output[j++] = input[i];
       }
 
       count = 1; // resets counter to look for consecutive repeat of the characters to follow
     }
-
     else
     {
-      *o++ = *i; // adds the char that are not repeated
+      output[j++] = input[i]; // no consecutive repeats
     }
   }
-  *o = '\0'; // adds a null character to the output string to mark the end of the string
+
+  output[j] = '\0'; //added null character to mark the end of the output string
 }
 
 int main(void)
