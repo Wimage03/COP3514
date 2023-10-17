@@ -9,6 +9,8 @@ e.g. input: helllloo
 
 #include <stdio.h>
 
+#define MSG_LEN 1000 // sets the maximum length of the message
+
 void compress(char *input, char *output)
 {
   char *i = input, *o = output; // i and o represent the pointers pointing to the input and output arrays respectively
@@ -33,9 +35,13 @@ void compress(char *input, char *output)
         *o++ = '0' + count; // converts integer count to char
         *o++ = *i;          // adds the repeating char to the output string
       }
-      else
+      else if (count > 1)
       {
         *o++ = *i;
+        *o++ = *i; // one consecutive repeat
+      }
+      else
+      {
         *o++ = *i; // no consecutive repeats
       }
 
@@ -52,7 +58,7 @@ void compress(char *input, char *output)
 
 int main(void)
 {
-  char input[1000], output[1000];
+  char input[MSG_LEN], output[MSG_LEN];
 
   printf("Enter message:");
   scanf("%s", input);

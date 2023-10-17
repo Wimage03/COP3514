@@ -1,9 +1,11 @@
 #include <stdio.h>
-#include <string.h>
 
-int main(void) {
-  char ch;
-  int count = 3;
-  ch = (char)count;
-  printf(" %c\n", ch);
+void toLower(char *input) {
+  while(*input++ != '\0') {
+    if(*input >= 'A' && *input <= 'Z') *input += 32;
+  }
+}
+
+int main(int argc, char *argv[]) {
+  printf("argv[1]: %s",argv[1]);
 }
